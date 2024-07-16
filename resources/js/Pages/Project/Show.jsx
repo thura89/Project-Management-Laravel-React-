@@ -1,7 +1,9 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { PROJECT_STATUS_CLASS_MAP, PROJECT_STATUS_TEXT_MAP } from "@/constants";
+import { Head } from "@inertiajs/react";
+import TasksTable from "../Task/TasksTable";
 
-const Show = ({ auth, project }) => {
+const Show = ({ auth, project, tasks, queryParams }) => {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -26,6 +28,7 @@ const Show = ({ auth, project }) => {
                         </div>
                         <div className="p-6 text-gray-900 dark:text-gray-100">
                             <div className="grid gap-1 grid-cols-2 mt-2">
+                                {/* First Column */}
                                 <div>
                                     <div>
                                         <label className="font-bold text-lg">
@@ -68,6 +71,9 @@ const Show = ({ auth, project }) => {
                                             {project.createdBy.name}
                                         </p>
                                     </div>
+                                </div>
+                                {/* Second Column */}
+                                <div>
                                     <div>
                                         <label className="font-bold text-lg">
                                             Due Date
@@ -84,10 +90,36 @@ const Show = ({ auth, project }) => {
                                             {project.created_at}
                                         </p>
                                     </div>
+                                    <div>
+                                        <label className="font-bold text-lg">
+                                            Updated By
+                                        </label>
+                                        <p className="mt-1">
+                                            {project.updatedBy.name}
+                                        </p>
+                                    </div>
                                 </div>
-
-                                <div></div>
                             </div>
+                            <div className="mt-4">
+                                <label className=" font-bold text-lg">
+                                    Description
+                                </label>
+                                <p className="mt-1">{project.description}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="pb-12">
+                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                        <div className="p-6 text-gray-900 dark:text-gray-100">
+                            <TasksTable
+                                tasks={tasks}
+                                queryParams={queryParams}
+                                hideProjectColumn={true}
+                            />
                         </div>
                     </div>
                 </div>
