@@ -1,31 +1,23 @@
 <?php
 
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
+
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    return redirect()->route('login');
 });
 
-
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get(
-        '/dashboard',
-        fn () =>
-        Inertia::render('Dashboard')
-    )->name(
-        'dashboard'
-    );
+   
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    
+    Route::get('/my-tasks', [TaskController::class, 'myTasks'])->name('task.mytasks');
     Route::resource('project', ProjectController::class);
     Route::resource('task', TaskController::class);
     Route::resource('user', UserController::class);

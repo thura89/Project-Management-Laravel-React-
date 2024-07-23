@@ -1,33 +1,27 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { PROJECT_STATUS_CLASS_MAP, PROJECT_STATUS_TEXT_MAP } from "@/constants";
-import { Head, Link } from "@inertiajs/react";
+import { USER_STATUS_CLASS_MAP, USER_STATUS_TEXT_MAP } from "@/constants";
+import { Head } from "@inertiajs/react";
 import TasksTable from "../Task/TasksTable";
 
-const Show = ({ auth, project, tasks, queryParams }) => {
+const Show = ({ auth, user, tasks, queryParams }) => {
     return (
         <AuthenticatedLayout
             user={auth.user}
             header={
                 <div className="flex items-center justify-between">
                     <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                        {`Project "${project.name}"`}
+                        {`User "${user.name}"`}
                     </h2>
-                    <Link
-                        href={route("project.edit",project.id)}
-                        className=" py-1 px-3 bg-emerald-500 rounded text-white transition-all shadow hover:bg-emerald-600"
-                    >
-                        Edit
-                    </Link>
                 </div>
             }
         >
-            <Head title={`Project "${project.name}"`} />
+            <Head title={`User "${user.name}"`} />
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                         <div>
                             <img
-                                src={project.image_path}
+                                src={user.image_path}
                                 alt=""
                                 className="w-full h-64 object-cover"
                             />
@@ -38,15 +32,15 @@ const Show = ({ auth, project, tasks, queryParams }) => {
                                 <div>
                                     <div>
                                         <label className="font-bold text-lg">
-                                            Project ID
+                                            User ID
                                         </label>
-                                        <p className="mt-1">{project.id}</p>
+                                        <p className="mt-1">{user.id}</p>
                                     </div>
                                     <div>
                                         <label className="font-bold text-lg">
-                                            Project Name
+                                            User Name
                                         </label>
-                                        <p className="mt-1">{project.name}</p>
+                                        <p className="mt-1">{user.name}</p>
                                     </div>
                                     <div>
                                         <label className="font-bold text-lg">
@@ -56,14 +50,14 @@ const Show = ({ auth, project, tasks, queryParams }) => {
                                             <span
                                                 className={
                                                     "px-2 py-1 rounded text-white " +
-                                                    PROJECT_STATUS_CLASS_MAP[
-                                                        project.status
+                                                    USER_STATUS_CLASS_MAP[
+                                                        user.status
                                                     ]
                                                 }
                                             >
                                                 {
-                                                    PROJECT_STATUS_TEXT_MAP[
-                                                        project.status
+                                                    USER_STATUS_TEXT_MAP[
+                                                        user.status
                                                     ]
                                                 }
                                             </span>
@@ -74,7 +68,7 @@ const Show = ({ auth, project, tasks, queryParams }) => {
                                             Created By
                                         </label>
                                         <p className="mt-1">
-                                            {project.createdBy.name}
+                                            {user.createdBy.name}
                                         </p>
                                     </div>
                                 </div>
@@ -85,7 +79,7 @@ const Show = ({ auth, project, tasks, queryParams }) => {
                                             Due Date
                                         </label>
                                         <p className="mt-1">
-                                            {project.due_date}
+                                            {user.due_date}
                                         </p>
                                     </div>
                                     <div>
@@ -93,7 +87,7 @@ const Show = ({ auth, project, tasks, queryParams }) => {
                                             Created At
                                         </label>
                                         <p className="mt-1">
-                                            {project.created_at}
+                                            {user.created_at}
                                         </p>
                                     </div>
                                     <div>
@@ -101,7 +95,7 @@ const Show = ({ auth, project, tasks, queryParams }) => {
                                             Updated By
                                         </label>
                                         <p className="mt-1">
-                                            {project.updatedBy.name}
+                                            {user.updatedBy.name}
                                         </p>
                                     </div>
                                 </div>
@@ -110,7 +104,7 @@ const Show = ({ auth, project, tasks, queryParams }) => {
                                 <label className=" font-bold text-lg">
                                     Description
                                 </label>
-                                <p className="mt-1">{project.description}</p>
+                                <p className="mt-1">{user.description}</p>
                             </div>
                         </div>
                     </div>
@@ -124,7 +118,7 @@ const Show = ({ auth, project, tasks, queryParams }) => {
                             <TasksTable
                                 tasks={tasks}
                                 queryParams={queryParams}
-                                hideProjectColumn={true}
+                                hideUserColumn={true}
                             />
                         </div>
                     </div>
