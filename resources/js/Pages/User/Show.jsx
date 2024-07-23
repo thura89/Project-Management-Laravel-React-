@@ -1,5 +1,5 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { USER_STATUS_CLASS_MAP, USER_STATUS_TEXT_MAP } from "@/constants";
+// import { USER_STATUS_CLASS_MAP, USER_STATUS_TEXT_MAP } from "../../constants";
 import { Head } from "@inertiajs/react";
 import TasksTable from "../Task/TasksTable";
 
@@ -47,7 +47,7 @@ const Show = ({ auth, user, tasks, queryParams }) => {
                                             Status
                                         </label>
                                         <p className="mt-1">
-                                            <span
+                                            {/* <span
                                                 className={
                                                     "px-2 py-1 rounded text-white " +
                                                     USER_STATUS_CLASS_MAP[
@@ -59,6 +59,11 @@ const Show = ({ auth, user, tasks, queryParams }) => {
                                                     USER_STATUS_TEXT_MAP[
                                                         user.status
                                                     ]
+                                                }
+                                            </span> */}
+                                            <span>
+                                                {
+                                                    user.status
                                                 }
                                             </span>
                                         </p>
